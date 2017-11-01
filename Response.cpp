@@ -241,7 +241,7 @@ bool Response::SendBody(Socket *aSocket) {
     char* buf = new char[len];
     int x = (int)fread(buf, 1, len, file);
     int r = aSocket->Send(buf, x);
-    delete buf;
+    delete[] buf;
     if (r < 0) {
       // Some kind of error.
       return false;
@@ -277,7 +277,7 @@ bool Response::SendBody(Socket *aSocket) {
     size_t bytesSent = fread(buf, 1, len, file);
     bytesRemaining -= bytesSent;
     int r = aSocket->Send(buf, (int)bytesSent);
-    delete buf;
+    delete[] buf;
     if (r < 0) {
       // Some kind of error.
       return false;
